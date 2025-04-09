@@ -1,0 +1,64 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="bg-white p-6 rounded-2xl shadow-md space-y-4"
+>
+  <div>
+    <input
+      type="text"
+      placeholder="Name"
+      formControlName="name"
+      class="w-full h-[48px] p-3 rounded border border-gray-300"
+    />
+    <div
+      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      class="text-red-500 text-sm mt-1"
+    >
+      Name is required.
+    </div>
+  </div>
+
+  <div>
+    <input
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+      class="w-full h-[48px] p-3 rounded border border-gray-300"
+    />
+    <div
+      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      class="text-red-500 text-sm mt-1"
+    >
+      <span *ngIf="form.get('email')?.errors?.['required']"
+        >Email is required.</span
+      >
+      <span *ngIf="form.get('email')?.errors?.['email']"
+        >Email is invalid.</span
+      >
+    </div>
+  </div>
+
+  <div>
+    <select
+      formControlName="role"
+      class="w-full h-[48px] p-3 rounded border border-gray-300"
+    >
+      <option value="" disabled selected>Select role</option>
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select>
+    <div
+      *ngIf="form.get('role')?.invalid && form.get('role')?.touched"
+      class="text-red-500 text-sm mt-1"
+    >
+      Role is required.
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full h-[48px] text-white rounded bg-blue-700 cursor-pointer"
+    [disabled]="form.invalid"
+  >
+    Add User
+  </button>
+</form>
