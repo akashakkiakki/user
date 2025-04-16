@@ -1,5 +1,5 @@
 <form
-  [formGroup]="form"
+  [formGroup]="userForm"
   (ngSubmit)="onSubmit()"
   class="bg-white p-6 rounded-2xl shadow-md space-y-4"
 >
@@ -11,7 +11,7 @@
       class="w-full h-[48px] p-3 rounded border border-gray-300"
     />
     <div
-      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      *ngIf="userForm.get('name')?.touched && userForm.get('name')?.invalid"
       class="text-red-500 text-sm mt-1"
     >
       Name is required.
@@ -26,13 +26,13 @@
       class="w-full h-[48px] p-3 rounded border border-gray-300"
     />
     <div
-      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid"
       class="text-red-500 text-sm mt-1"
     >
-      <span *ngIf="form.get('email')?.errors?.['required']"
+      <span *ngIf="userForm.get('email')?.errors?.['required']"
         >Email is required.</span
       >
-      <span *ngIf="form.get('email')?.errors?.['email']"
+      <span *ngIf="userForm.get('email')?.errors?.['email']"
         >Email is invalid.</span
       >
     </div>
@@ -47,7 +47,7 @@
       <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
     </select>
     <div
-      *ngIf="form.get('role')?.invalid && form.get('role')?.touched"
+      *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched"
       class="text-red-500 text-sm mt-1"
     >
       Role is required.
@@ -57,7 +57,6 @@
   <button
     type="submit"
     class="w-full h-[48px] text-white rounded bg-blue-700 cursor-pointer"
-    [disabled]="form.invalid"
   >
     Add User
   </button>

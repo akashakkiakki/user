@@ -17,7 +17,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent implements OnInit {
-  form!: FormGroup;
+  userForm!: FormGroup;
 
   roles = ['Admin', 'Editor', 'Viewer'];
 
@@ -32,7 +32,7 @@ export class UserFormComponent implements OnInit {
   }
 
   initilizeForm() {
-    this.form = this.fb.group({
+    this.userForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required],
@@ -40,8 +40,9 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.userService.addUser(this.form.value);
+    this.userForm.markAllAsTouched();
+    if (this.userForm.valid) {
+      this.userService.addUser(this.userForm.value);
       this.dialogRef.close();
     }
   }
